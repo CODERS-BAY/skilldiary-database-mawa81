@@ -1,4 +1,4 @@
-# Database Diary 06.02.2020 Mario Wagner
+# Database Diary 13.02.2020 Mario Wagner
 
 ## Theoretical part 
 
@@ -35,6 +35,6 @@
 
 ERM of a Starmovie Company
 
-![Github](https://github.com/CODERS-BAY/cinema-mawa81)
+https://github.com/CODERS-BAY/cinema-mawa81
 
 ---
