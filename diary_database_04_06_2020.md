@@ -5,8 +5,7 @@
 We made a database of a company an had to form some SQL Queries (with JOINS)
 
 Solution ->
-https://github.com/CODERS-BAY/joins-mawa81/blob/master/solution.sql
-
+https://github.com/CODERS-BAY/joins-mawa81/blob/master/solution.sql <br> <br>
 
 sample for multiple joins:
 ```
@@ -21,9 +20,10 @@ JOIN countries ON countries.country_id = locations.country_id
 JOIN employees ON departments.department_id = employees.department_id
 
 WHERE departments.manager_id = employees.manager_id;
-```
+``` 
 
-last query -> the employees entity can get different alias like "a","b"... to get different versions of the same entity
+SELF JOIN
+the employees entity can get different aliases like "a","b"... to get different versions of the same entity
 ```
 SELECT CONCAT(a.first_name, " ", a.last_name) AS Manager, CONCAT(b.first_name, " ", b.last_name) AS Subordinate
 
@@ -33,3 +33,9 @@ WHERE a.employee_id = b.manager_id
 
 ORDER BY a.employee_id ASC;
 ```
+
+inner join ==> sucht nach werten die auf beiden seiten gleich sind <br>
+left join ==> sucht nach werten, die links größer sind <br>
+right join ==> sucht nach werten, die rechts größer sind <br>
+outer join ==> sucht nach werten, die nicht gleich sind <br> <br>
+==> es geht also immer um die logischen operatoren im ON statement <br>
