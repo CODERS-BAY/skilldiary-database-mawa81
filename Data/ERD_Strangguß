@@ -1,0 +1,64 @@
+
+Erzeugungsvorschrift_Produkt (**Text-Number** : int(11), ProduktID : varchar(32) )
+Produkt( **ProduktID** : varchar(32), ProduktName : varchar(32), ProduktGruppeID : varchar(32) )
+Produktgruppe( **ProduktGruppeID** : varchar(32) , ProduktGruppenName : varchar(32) )
+Prozess ()
+
+Erzeugungsvorschrift ( **Text-Number** : int(11), aktiv : boolean, Bereich : varchar(32), Unterbereich : varchar(32), Prozessparameter : varchar(32), Qualitätsparameter : varchar(32), DefaultwertEinheit : varchar(32), ObergrenzeEinheit : varchar(32), UntergrenzeEinheit : varchar(32), Messzeitpunkt : timestamp, Einheit : varchar(32), Quelle : varchar(32), Eingabeart : varchar(32) )
+
+
+Stranggießanlage:
+
+Stahlproduktion
+Pfanne (Pfanneninhalt ca. 120 t)
+Produktionseinheit (Charge)
+Gießen erfolgt über Kokille über den Verteiler in Strängen (2 Strang / 4 Strang Anlagen)
+Produkte (4-8m lange Stücke) werden am Ende der Anlage abgeschnitten
+
+
+## Charge:
+
+Werkmarke -> chemische Zusammensetzung einer Charge (z.B. Werksmarke X79 beinhaltet S 0.04%, Ph 0.008% ....)
+
+Plandaten -> z.B. Gießgeschwindigkeit, Kühlwassermenge, Kokillenpulver ....)
+
+Werkmarke und Plandaten gelten für eine Charge
+
+Ausgenommen sind die Schnittlängen der Produkte
+
+Es muss aber nicht für jede zu mögliche  Werksmarke eine Charge vorhanden sein. 
+
+
+## Strang:
+
+in Zonen eingeteilt
+ 
+je nach Zone wird während des Gießens Wasser auf den  Strang gespritzt
+  
+Diese Zonen sind fix (für immer! Zone 1, Zone 2, Zone 3, Zone 4) für beide Anlagen) 
+
+
+Infrastruktur:
+
+Ort:             Persontyp:     Person:                         Schicht:    Bildschirm:
+
+Büro                1           Betriebsingenieur               nein            ja  
+                    2           Sekretärin                      nein            ja  
+                    3           Arbeitsaufbereiter              nein            ja  
+                    4           Metallurge                      nein            ja  
+                    5           EDV Techniker                   nein            ja 
+Hauptleitstand      6           Schichtmeister                  ja              ja  
+                    7           Operator1 
+                                (Schichtmeisterstellvertreter)  ja              ja  
+                    8           Schichtarbeiter1                ja  
+Schneideleitstand   7           Operator2                       ja              ja  
+                    8           Schichtarbeiter2                ja  
+Serviceraum         9           Elektriker                      nein   
+                    10          Schlosser                       nein   
+                    11          Helfer1                         ja  
+Kran                12          Kranfahrer1                     ja  
+ 
+In einer Anlage gibt es 2 Leitstände  
+Hauptleitstand:   2 Personen     4 Bildschirme 
+Schneideleitstand :   1 Personen     2 Bildschirme 
+Beim Verteiler und Schneidemaschine        : 2 Schichtarbeiter 1x Kranfahrer 
