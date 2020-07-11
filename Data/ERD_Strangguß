@@ -121,4 +121,9 @@ Prozess ()
 
 Erzeugungsvorschrift ( **Text-Number** : int(11), aktiv : boolean, Bereich : varchar(32), Unterbereich : varchar(32), Prozessparameter : varchar(32), Qualitätsparameter : varchar(32), DefaultwertEinheit : varchar(32), ObergrenzeEinheit : varchar(32), UntergrenzeEinheit : varchar(32), Messzeitpunkt : timestamp, Einheit : varchar(32), Quelle : varchar(32), Eingabeart : varchar(32) )
 
-Prozess 
+Prozess
+
+
+cc_personal (personal_id, p.personal_name, personal_typ, Bildschirm)
+cc_personal_typ (personal_typ_id, personal_typ_bezeichnung)
+cc_personal_schichtplan_akt (schichtplan_datum, schichtplan_typ_id)
