@@ -85,7 +85,7 @@ Pfanne
 
 Charge (Schnittplan, Erzeugungsvorschrift)
 
-Schnittplan (Produkt, Länge)
+
 
 Format (Strang_Breite, Strang_Dicke)
 
@@ -93,35 +93,35 @@ Format (Strang_Breite, Strang_Dicke)
 Schnittplan - Charge 1:n
 
 
-Gußplan (Anlage_ID, Pfanne_ID, Charge_ID, Gußzeit)
-Personalplan (Anlage_ID, Gußzeit, Schicht)
-Pfanne (Pfanne_ID, Pfanne_Bezeichnung, Pfanne_Inhalt, Wartungs_ID)
-Anlage (Anlage_ID, Strang_Anzahl, Verteiler_ID, Kokille_ID, Anlage_Laenge, AGF_ID, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl)
-Strang(Strang_ID, Kühl_ID )
-Strang_Kühlung(Kühl_ID, Zone_1, Zone_2, Zone_3, Zone_4)
-Anlage_Gießformate (AGF_ID, Anlage_ID, Format_ID)
-Gießformate (Format_ID, Strang_Breite, Strang_Dicke)
-Verteiler (Verteiler_ID, Verteiler_Bezeichnung, Verteiler_Gußmenge_max ,Wartungs_ID)
-Verteilertyp ()
-Kokille (Kokille_ID, Kokille_Bezeichnung, Wartungs_ID)
-Kokilletyp
+Gußplan (**Gußzeit**, *Anlage_ID*, *Pfanne_ID*, *Charge_ID* )
+Personalplan (*Anlage_ID*, Gußzeit, Schicht)
+Pfanne (**Pfanne_ID**, Pfanne_Bezeichnung, Pfanne_Inhalt, Wartungs_ID)
+Anlage (**Anlage_ID**, Strang_Anzahl, *Verteiler_ID*, *Kokille_ID*, Anlage_Laenge, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl, Wartungs_ID, Chargen_Zaehler_seit_letzter_Wartung)
+Strang(**Strang_ID**, *Kühl_ID* )
+Strang_Kühlung(**Kühl_ID**, Zone_1, Zone_2, Zone_3, Zone_4)
+
+Gießformate (**Format_ID**, Strang_Breite, Strang_Dicke)
+Verteiler (**Verteiler_ID**, *Verteiler_Typ_ID*, *Wartungs_ID*)
+Verteilertyp (**Verteiler_Typ_ID**, *Verteiler_Bezeichnung*)
+Kokille (**Kokille_ID**, *Kokille_Typ_ID*, *Wartungs_ID*)
+Kokilletyp (**Kokille_Typ_ID**, Kokillen_Bezeichnung, *Format_ID*)
 //Produkt (Abschnittzeitpunkt, Produkt_Laenge)
-Charge (Charge_ID, Werksmarke_ID, Plandaten_ID, Schnittplan, Erzeugungsvorschrift)
-Werksmarke (Werksmarke_ID, Element_ID, Anteil_min, Anteil_max)
-Element (Element_ID, Element_Bezeichnung)
-Plandaten (Plandaten_ID, Gießgeschwindigkeit, Kühlwassermenge, Kokillenpulver)
+Charge (**Charge_ID**, *Werksmarke_ID*, *Plandaten_ID*, *Schnittplan_ID*, *Erzeugungsvorschrift_ID*)
+Werksmarke (**Werksmarke_ID**, *Element_ID*, Anteil_min, Anteil_max)
+Element (**Element_ID**, Element_Bezeichnung)
+Plandaten (**Plandaten_ID**, Gießgeschwindigkeit, Kühlwassermenge, Kokillenpulver)
 
 
-Wartungsplan (Teil_ID, Wartungsdatum_geplant, Wartungsdatum_history)
+Wartungsplan (**Wartungs_ID**, Wartungsdatum_geplant, Wartungsdatum_history)
 
 Erzeugungsvorschrift_Produkt (**Text-Number** : int(11), ProduktID : varchar(32) )
-Produkt( **ProduktID** : varchar(32), ProduktName : varchar(32), ProduktGruppeID : varchar(32), Abschnittzeitpunkt, Produkt_Laenge )
+Produkt( **ProduktID** : varchar(32), ProduktName : varchar(32), ProduktGruppeID : varchar(32), Abschnittzeitpunkt)
 Produktgruppe( **ProduktGruppeID** : varchar(32) , ProduktGruppenName : varchar(32) )
 Prozess ()
 
 Erzeugungsvorschrift ( **Text-Number** : int(11), aktiv : boolean, Bereich : varchar(32), Unterbereich : varchar(32), Prozessparameter : varchar(32), Qualitätsparameter : varchar(32), DefaultwertEinheit : varchar(32), ObergrenzeEinheit : varchar(32), UntergrenzeEinheit : varchar(32), Messzeitpunkt : timestamp, Einheit : varchar(32), Quelle : varchar(32), Eingabeart : varchar(32) )
+Schnittplan (**Schnittplan_ID**, *Produkt_ID*, Laenge)
 
-Prozess
 
 
 cc_personal (personal_id, p.personal_name, personal_typ, Bildschirm)
