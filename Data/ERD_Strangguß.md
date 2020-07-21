@@ -96,9 +96,11 @@ Schnittplan - Charge 1:n
 Gußplan (**Gußzeit**, *Anlage_ID*, *Pfanne_ID*, *Charge_ID* )
 Personalplan (*Anlage_ID*, Gußzeit, Schicht)
 Pfanne (**Pfanne_ID**, Pfanne_Bezeichnung, Pfanne_Inhalt, Wartungs_ID)
-Anlage (**Anlage_ID**, Strang_Anzahl, *Verteiler_ID*, *Kokille_ID*, Anlage_Laenge, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl, Wartungs_ID, Chargen_Zaehler_seit_letzter_Wartung)
-Strang(**Strang_ID**, *Kühl_ID* )
-Strang_Kühlung(**Kühl_ID**, Zone_1, Zone_2, Zone_3, Zone_4)
+Anlage (**Anlage_ID**, Strang_Anzahl, *Verteiler_ID*, *Kokille_ID*, Anlage_Laenge, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl, Wartungs_ID, maximale_Chargenanzahl, aktuelle_Chargenanzahl)
+Anlage_Straenge (**Anlage_ID**,**Strang_ID**)
+Strang(**Strang_ID**, Zone_1, Zone_2, Zone_3, Zone_4 )
+
+    ( Strang_Kühlung(**Kühl_ID**, Zone_1, Zone_2, Zone_3, Zone_4) )
 
 Gießformate (**Format_ID**, Strang_Breite, Strang_Dicke)
 Verteiler (**Verteiler_ID**, *Verteiler_Typ_ID*, *Wartungs_ID*)
