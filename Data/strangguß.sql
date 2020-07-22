@@ -17,16 +17,16 @@ create table Personalplan(
 
 create table Gußplan
 (
-    Gußzeit            time NOT NULL,
-    Anlage_ID          int(11),
-    Pfannen_Chargen_ID int(11),
+    Gußzeit           time NOT NULL,
+    Anlage_ID         int(11),
+    Pfannen_Charge_ID int(11),
     PRIMARY KEY (Gußzeit),
     CONSTRAINT anlage_fk
         FOREIGN KEY (Anlage_ID)
             REFERENCES Anlage (Anlage_ID),
-    CONSTRAINT pfannen_chargen_fk
-        FOREIGN KEY (Pfannen_Chargen_ID)
-
+    CONSTRAINT pfannen_charge_fk
+        FOREIGN KEY (Pfannen_Charge_ID)
+            REFERENCES Pfannen_Charge (Pfannen_Charge_ID)
 );
 
 create table Pfanne
@@ -34,19 +34,19 @@ create table Pfanne
     Pfanne_ID          int(11) NOT NULL,
     Pfanne_Bezeichnung varchar(40),
     Pfanne_Inhalt      double,
-    Wartungs_ID        date,
+    Wartungs_ID        int(11),
     PRIMARY KEY (Pfanne_ID),
     CONSTRAINT wartungs_fk
         FOREIGN KEY (Wartungs_ID)
             REFERENCES Wartungsplan (Wartungs_ID)
 );
 
-create table Pfannen_Chargen
+create table Pfannen_Charge
 (
-    Pfannen_Chargen_ID int(11) NOT NULL,
-    Pfanne_ID          int(11),
-    Charge_ID          int(11),
-    PRIMARY KEY (Pfannen_Chargen_ID),
+    Pfannen_Charge_ID int(11) NOT NULL,
+    Pfanne_ID         int(11),
+    Charge_ID         int(11),
+    PRIMARY KEY (Pfannen_Charge_ID),
     CONSTRAINT pfanne_fk
         FOREIGN KEY (Pfanne_ID)
             REFERENCES Pfanne (Pfanne_ID),
@@ -87,7 +87,7 @@ create table Anlage
     Zone_4_ID                  int(11),
     Gießgeschwindigkeit        double,
     spezifisches_Gewicht_Stahl double,
-    Wartungs_ID                date,
+    Wartungs_ID                int(11),
     maximale_Chargenanzahl     int(11),
     aktuelle_Chargenanzahl     int(11),
     PRIMARY KEY (Anlage_ID),
@@ -149,11 +149,68 @@ create table Anlage_Straenge
             REFERENCES Anlage (Anlage_ID),
     CONSTRAINT straenge_anlage_fk
         FOREIGN KEY (Strang_ID)
-                        REFERENCES Strang(Strang_ID)
+            REFERENCES Strang (Strang_ID)
 );
 
-
-create table Strang(
-                    Strang_ID int(11) NOT NULL,
-                    PRIMARY KEY (Strang_ID)
+create table Strang
+(
+    Strang_ID int(11) NOT NULL,
+    PRIMARY KEY (Strang_ID)
 );
+
+create table Verteiler
+(
+    Verteiler_ID     int(11) NOT NULL,
+    Verteiler_Typ_ID int(11),
+    Wartungs_ID      int(11),
+    PRIMARY KEY (Verteiler_ID),
+    CONSTRAINT veteiler_typ_fk
+        FOREIGN KEY (Verteiler_Typ_ID)
+            REFERENCES Verteiler_Typ (Verteiler_Typ_ID)
+);
+
+create table Verteiler_Typ
+(
+    Verteiler_Typ_ID      int(11) NOT NULL,
+    Verteiler_Bezeichnung varchar(500),
+    PRIMARY KEY (Verteiler_Typ_ID)
+);
+
+create table Kokille
+(
+    Kokille_ID     int(11) NOT NULL,
+    Kokille_Typ_ID int(11),
+    Wartungs_ID    int(11),
+    PRIMARY KEY (Kokille_ID),
+    CONSTRAINT kokille_typ_fk
+        FOREIGN KEY (Kokille_Typ_ID)
+            REFERENCES Kokille_Typ (Kokille_Typ_ID)
+);
+
+create table Kokille_Typ
+(
+    Kokille_Typ_ID      int(11) NOT NULL,
+    Kokille_Bezeichnung varchar(500),
+    Format_ID           int(11),
+    PRIMARY KEY (Kokille_Typ_ID),
+    CONSTRAINT format_fk
+        FOREIGN KEY (Format_ID)
+            REFERENCES Format (Format_ID)
+);
+
+create table Format
+(
+    Format_ID          int(11) NOT NULL,
+    Format_Bezeichnung varchar(500),
+    Breite             double,
+    Dicke              double,
+    PRIMARY KEY (Format_ID)
+);
+
+create table Produkt
+(
+    Produkt_ID,
+    Produkt_Beschreibung,
+    Abschnittzeitpunkt,
+    Produkt_Laenge
+)

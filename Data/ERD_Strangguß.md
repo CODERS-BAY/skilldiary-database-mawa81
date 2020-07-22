@@ -93,21 +93,23 @@ Format (Strang_Breite, Strang_Dicke)
 Schnittplan - Charge 1:n
 
 
-Gußplan (**Gußzeit**, *Anlage_ID*, *Pfanne_ID*, *Charge_ID* )
-Personalplan (*Anlage_ID*, Gußzeit, Schicht)
-Pfanne (**Pfanne_ID**, Pfanne_Bezeichnung, Pfanne_Inhalt, Wartungs_ID)
-Anlage (**Anlage_ID**, Strang_Anzahl, *Verteiler_ID*, *Kokille_ID*, Anlage_Laenge, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl, Wartungs_ID, maximale_Chargenanzahl, aktuelle_Chargenanzahl)
+Gußplan (**Gußzeit**, *Anlage_ID*, *Pfannen_Chargen_ID* )
+Personalplan (*Anlage_ID*, Gußzeit, Schicht )
+Pfanne (**Pfanne_ID**, Pfanne_Bezeichnung, Pfanne_Inhalt, Wartungs_ID )
+Pfannen_Chargen(**Pfannen_Chargen_ID**:int(11), *Pfanne_ID*:int(11), *Charge_ID*:int(11) )
+    
+Anlage (**Anlage_ID**, Strang_Anzahl, *Verteiler_ID*, *Kokille_ID*, Anlage_Laenge, Gießgeschwindigkeit, spezifisches_Gewicht_Stahl, Wartungs_ID, maximale_Chargenanzahl, aktuelle_Chargenanzahl )
 Anlage_Straenge (**Anlage_ID**,**Strang_ID**)
 Strang(**Strang_ID**, Zone_1, Zone_2, Zone_3, Zone_4 )
 
     ( Strang_Kühlung(**Kühl_ID**, Zone_1, Zone_2, Zone_3, Zone_4) )
 
-Gießformate (**Format_ID**, Strang_Breite, Strang_Dicke)
+Format (**Format_ID**, Strang_Breite, Strang_Dicke )
 Verteiler (**Verteiler_ID**, *Verteiler_Typ_ID*, *Wartungs_ID*)
 Verteilertyp (**Verteiler_Typ_ID**, *Verteiler_Bezeichnung*)
 Kokille (**Kokille_ID**, *Kokille_Typ_ID*, *Wartungs_ID*)
 Kokilletyp (**Kokille_Typ_ID**, Kokillen_Bezeichnung, *Format_ID*)
-//Produkt (Abschnittzeitpunkt, Produkt_Laenge)
+//Produkt (**Produkt_ID**, Produkt_Beschreibung, Abschnittzeitpunkt, Produkt_Laenge)
 Charge (**Charge_ID**, *Werksmarke_ID*, *Plandaten_ID*, *Schnittplan_ID*, *Erzeugungsvorschrift_ID*)
 Werksmarke (**Werksmarke_ID**, *Element_ID*, Anteil_min, Anteil_max)
 Element (**Element_ID**, Element_Bezeichnung)
