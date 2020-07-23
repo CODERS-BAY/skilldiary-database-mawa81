@@ -72,6 +72,9 @@ create table Charge
     CONSTRAINT schnittplan_fk
         FOREIGN KEY (Schnittplan_ID)
             REFERENCES Schnittplan (Schnittplan_ID),
+    CONSTRAINT erzeugungsvorschrift_fk
+        FOREIGN KEY (Erzeugungsvorschrift_ID)
+            REFERENCES Erzeugungsvorschrift (Erzeugungsvorschrift_ID)
 );
 
 create table Anlage
@@ -158,6 +161,19 @@ create table Strang
     PRIMARY KEY (Strang_ID)
 );
 
+create table Strang_Abschnittszeitpunkte
+(
+    Strang_ID              int(11),
+    Abschnittszeitpunkt_ID time,
+    PRIMARY KEY (Strang_ID, Abschnittszeitpunkt_ID)
+);
+
+create table Abschnittszeitpunkte
+(
+    Abschnittszeitpunkte_ID time NOT NULL,
+    PRIMARY KEY (Abschnittszeitpunkte_ID)
+);
+
 create table Verteiler
 (
     Verteiler_ID     int(11) NOT NULL,
@@ -209,8 +225,124 @@ create table Format
 
 create table Produkt
 (
-    Produkt_ID,
-    Produkt_Beschreibung,
-    Abschnittzeitpunkt,
-    Produkt_Laenge
-)
+    Produkt_ID           int(11) NOT NULL,
+    Produkt_Beschreibung varchar(500),
+    Produktgruppe_ID     int(11),
+    Abschnittzeitpunkt   time,
+    Produkt_Laenge       double,
+    PRIMARY KEY (Produkt_ID),
+    CONSTRAINT abschnittszeitpunk_fk
+        FOREIGN KEY (Abschnittzeitpunkt)
+            REFERENCES Abschnittszeitpunkte (Abschnittszeitpunkte_ID),
+    CONSTRAINT produktgruppe_produkt_fk
+        FOREIGN KEY (Produktgruppe_ID)
+            REFERENCES Produktgruppe (Produktgruppe_ID)
+);
+
+create table Produktgruppe
+(
+    Produktgruppe_ID   int(11) NOT NULL,
+    Produktgruppe_Name varchar(32),
+    PRIMARY KEY (Produktgruppe_ID)
+);
+
+create table Werksmarke
+(
+    Werksmarke_ID           varchar(32) NOT NULL,
+    Werksmarke_Beschreibung varchar(500),
+    PRIMARY KEY (Werksmarke_ID)
+);
+
+create table Werksmarke_Elemente
+(
+    Werksmarke_ID varchar(32) NOT NULL,
+    Element_ID    varchar(3),
+    Anteil_min    double,
+    Anteil_max    double,
+    PRIMARY KEY (Werksmarke_ID, Element_ID),
+    CONSTRAINT werksmarke_fk
+        FOREIGN KEY (Werksmarke_ID)
+            REFERENCES Werksmarke (Werksmarke_ID),
+    CONSTRAINT elemente_fk
+        FOREIGN KEY (Element_ID)
+            REFERENCES Element (Element_ID)
+);
+
+create table Element
+(
+    Element_ID           varchar(3) NOT NULL,
+    Element_Name         varchar(32),
+    Element_Beschreibung varchar(500),
+    PRIMARY KEY (Element_ID)
+);
+
+create table Plandaten
+(
+    Plandaten_ID        int(11) NOT NULL,
+    Gießgeschwindigkeit double,
+    Kühlwassermenge     double,
+    Kokillenpulver      varchar(32),
+    PRIMARY KEY (Plandaten_ID)
+);
+
+create table Erzeugungsvorschrift
+(
+    Erzeugungsvorschrift_ID int(11) NOT NULL,
+    Produktgruppe_ID        int(11),
+    PRIMARY KEY (Erzeugungsvorschrift_ID),
+    CONSTRAINT produktgruppe_fk
+        FOREIGN KEY (Produktgruppe_ID)
+            REFERENCES Produktgruppe (Produktgruppe_ID)
+);
+
+create table Prozess
+(
+    Prozess_ID         int(11) NOT NULL,
+    Text_Number        int(11),
+    aktiv              boolean,
+    Bereich            varchar(32),
+    Unterbereich       varchar(32),
+    Prozessparameter   varchar(32),
+    Qualitätsparameter varchar(32),
+    DefaultwertEinheit varchar(32),
+    ObergrenzeEinheit  varchar(32),
+    UntergrenzeEinheit varchar(32),
+    Messzeitpunkt      timestamp,
+    Einheit            varchar(32),
+    Quelle             varchar(32),
+    Eingabeart         varchar(32),
+    PRIMARY KEY (Prozess_ID)
+);
+
+create table Prozess_Liste
+(
+    Erzeugungsvorschrift_ID int(11) NOT NULL,
+    Prozess_ID              int(11),
+    PRIMARY KEY (Erzeugungsvorschrift_ID, Prozess_ID),
+    CONSTRAINT erzeugungsvorschrift_fk
+        FOREIGN KEY (Erzeugungsvorschrift_ID)
+            REFERENCES Erzeugungsvorschrift (Erzeugungsvorschrift_ID),
+    CONSTRAINT prozess_liste_fk
+        FOREIGN KEY (Prozess_ID)
+            REFERENCES Prozess (Prozess_ID)
+);
+
+create table Schnittplan
+(
+    Schnittplan_ID   int(11) NOT NULL,
+    Produktgruppe_ID int(11),
+    Laenge           double,
+    PRIMARY KEY (Schnittplan_ID),
+    CONSTRAINT schnittplan_produkt_fk
+        FOREIGN KEY (Produktgruppe_ID)
+            REFERENCES Produktgruppe (Produktgruppe_ID)
+);
+
+create table Wartungsplan
+(
+    Wartungs_ID           int(11) NOT NULL,
+    Wartungsdatum_geplant date,
+    Wartungsdatum_history date,
+    PRIMARY KEY (Wartungs_ID)
+);
+
